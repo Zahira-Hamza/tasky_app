@@ -10,21 +10,21 @@ A clean, production-ready task management app built with Flutter. Tasky supports
 
 | Splash | Onboarding | Home | New Task |
 |--------|------------|------|----------|
-| ![Splash Dark](screenshots/splash_dark.png) | ![Onboarding Dark](screenshots/onboarding_dark.png) | ![Home Dark](screenshots/home_dark.png) | ![New Task Dark](screenshots/new_task_dark.png) |
+| ![Splash Dark](screenshots/splash_dark.jpeg) | ![Onboarding Dark](screenshots/onboarding_dark.jpeg) | ![Home Dark](screenshots/home_dark.jpeg) | ![New Task Dark](screenshots/new_task_dark.jpeg) |
 
 | To Do | Completed | Profile | User Details |
 |-------|-----------|---------|--------------|
-| ![To Do Dark](screenshots/todo_dark.png) | ![Completed Dark](screenshots/completed_dark.png) | ![Profile Dark](screenshots/profile_dark.png) | ![User Details Dark](screenshots/user_details_dark.png) |
+| ![To Do Dark](screenshots/todo_dark.jpeg) | ![Completed Dark](screenshots/completed_dark.jpeg) | ![Profile Dark](screenshots/profile_dark.jpeg) | ![User Details Dark](screenshots/user_details_dark.jpeg) |
 
 ### 🌕 Light Mode
 
 | Splash | Onboarding | Home | New Task |
 |--------|------------|------|----------|
-| ![Splash Light](screenshots/splash_light.png) | ![Onboarding Light](screenshots/onboarding_light.png) | ![Home Light](screenshots/home_light.png) | ![New Task Light](screenshots/new_task_light.png) |
+| ![Splash Light](screenshots/splash_light.jpeg) | ![Onboarding Light](screenshots/onboarding_light.jpeg) | ![Home Light](screenshots/home_light.jpeg) | ![New Task Light](screenshots/new_task_light.jpeg) |
 
 | To Do | Completed | Profile | User Details |
 |-------|-----------|---------|--------------|
-| ![To Do Light](screenshots/todo_light.png) | ![Completed Light](screenshots/completed_light.png) | ![Profile Light](screenshots/profile_light.png) | ![User Details Light](screenshots/user_details_light.png) |
+| ![To Do Light](screenshots/todo_light.jpeg) | ![Completed Light](screenshots/completed_light.jpeg) | ![Profile Light](screenshots/profile_light.jpeg) | ![User Details Light](screenshots/user_details_light.jpeg) |
 
 ---
 
