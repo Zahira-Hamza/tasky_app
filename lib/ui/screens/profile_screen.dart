@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 
-import '../../core/theme/app_colors.dart';
 import '../../core/di/service_locator.dart';
+import '../../core/theme/app_colors.dart';
+import '../../data/repositories/task_repository.dart';
 import '../../data/repositories/user_repository.dart';
+import '../../logic/task_cubit/task_cubit.dart';
 import '../../logic/theme_cubit/theme_cubit.dart';
 import '../widgets/profile_avatar.dart';
 import 'onboarding_screen.dart';
@@ -32,17 +34,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final repo = sl<UserRepository>();
     final name = await repo.getUserName();
     final quote = await repo.getMotivationQuote();
-    if (mounted) setState(() {
-      _userName = name;
-      _quote = quote;
-    });
+    if (mounted)
+      setState(() {
+        _userName = name;
+        _quote = quote;
+      });
   }
 
   Future<void> _logout() async {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
         title: Text('Log Out',
             style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold)),
         content: Text('Are you sure you want to log out?',
@@ -56,19 +60,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
             child: Text('Log Out',
-                style:
-                    TextStyle(color: Colors.redAccent, fontSize: 14.sp, fontWeight: FontWeight.w600)),
+                style: TextStyle(
+                    color: Colors.redAccent,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600)),
           ),
         ],
       ),
     );
 
     if (confirmed == true && mounted) {
-      final repo = sl<UserRepository>();
-      await repo.clearAll();
-      // Reset hive settings box
+      // 1. Clear user profile data (name, quote, image, onboarding flag)
+      await sl<UserRepository>().clearAll();
+
+      // 2. Clear ALL tasks so the next user starts fresh
+      await sl<TaskRepository>().deleteAllTasks();
+
+      // 3. Reset the in-memory TaskCubit state so the home screen
+      //    doesn't flash stale tasks before navigation completes
+      if (mounted) context.read<TaskCubit>().clearTasks();
+
+      // 4. Clear theme preference so next user starts on light mode
       final box = await Hive.openBox('settingsBox');
       await box.clear();
+      if (mounted) context.read<ThemeCubit>().resetToLight();
 
       if (!mounted) return;
       Navigator.pushAndRemoveUntil(
@@ -94,8 +109,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               // ─── App Bar row ──────────────────────────────────────
               Padding(
-                padding:
-                    EdgeInsets.fromLTRB(20.w, 16.h, 20.w, 0),
+                padding: EdgeInsets.fromLTRB(20.w, 16.h, 20.w, 0),
                 child: Row(
                   children: [
                     Expanded(
@@ -189,8 +203,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     label: 'Dark Mode',
                     trailing: Switch(
                       value: dark,
-                      onChanged: (_) =>
-                          ctx.read<ThemeCubit>().toggleTheme(),
+                      onChanged: (_) => ctx.read<ThemeCubit>().toggleTheme(),
                     ),
                     dividerColor: dividerColor,
                   );
@@ -250,8 +263,7 @@ class _ProfileItem extends StatelessWidget {
         InkWell(
           onTap: onTap,
           child: Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
             child: Row(
               children: [
                 Icon(icon,

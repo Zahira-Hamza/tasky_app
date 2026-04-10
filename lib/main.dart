@@ -3,12 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:tasky/ui/screens/onboarding_screen.dart';
 
 import 'core/di/service_locator.dart';
 import 'core/theme/app_theme.dart';
 import 'logic/task_cubit/task_cubit.dart';
 import 'logic/theme_cubit/theme_cubit.dart';
-import 'ui/screens/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,9 +49,9 @@ class TaskyApp extends StatelessWidget {
                 title: 'Tasky',
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,
-                themeMode: themeMode,
+                themeMode: ThemeMode.system,
                 debugShowCheckedModeBanner: false,
-                home: const SplashScreen(),
+                home: const OnboardingScreen(),
               );
             },
           ),

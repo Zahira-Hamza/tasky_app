@@ -21,5 +21,10 @@ class ThemeCubit extends Cubit<ThemeMode> {
     emit(!isDark ? ThemeMode.dark : ThemeMode.light);
   }
 
+  /// Resets to light mode immediately — called on logout.
+  void resetToLight() {
+    emit(ThemeMode.light);
+  }
+
   bool get isDark => state == ThemeMode.dark;
 }

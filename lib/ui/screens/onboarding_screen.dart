@@ -1,11 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../core/theme/app_colors.dart';
 import '../../core/di/service_locator.dart';
+import '../../core/theme/app_colors.dart';
 import '../../data/repositories/user_repository.dart';
 import 'root_screen.dart';
 
@@ -23,7 +21,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Future<void> _pickImage() async {
     final picker = ImagePicker();
-    final picked = await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+    final picked =
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
     if (picked != null) {
       setState(() => _profileImagePath = picked.path);
     }
@@ -37,7 +36,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           content: const Text('Please enter your name'),
           backgroundColor: AppColors.primary,
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
       );
       return;
@@ -133,41 +133,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
               SizedBox(height: 28.h),
               // Profile image picker
-              GestureDetector(
-                onTap: _pickImage,
-                child: Stack(
-                  children: [
-                    CircleAvatar(
-                      radius: 48.r,
-                      backgroundColor: isDark
-                          ? AppColors.cardDark
-                          : const Color(0xFFE8E8E8),
-                      backgroundImage: _profileImagePath != null
-                          ? FileImage(File(_profileImagePath!))
-                          : null,
-                      child: _profileImagePath == null
-                          ? Icon(Icons.person_rounded,
-                              size: 44.r,
-                              color: AppColors.textGrey)
-                          : null,
-                    ),
-                    Positioned(
-                      right: 0,
-                      bottom: 0,
-                      child: Container(
-                        width: 28.w,
-                        height: 28.w,
-                        decoration: const BoxDecoration(
-                          color: AppColors.primary,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(Icons.camera_alt_rounded,
-                            size: 16.sp, color: Colors.white),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+
               SizedBox(height: 28.h),
               // Onboarding illustration
               ClipRRect(
@@ -212,8 +178,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ? const SizedBox(
                           width: 22,
                           height: 22,
-                          child:
-                              CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5),
+                          child: CircularProgressIndicator(
+                              color: Colors.white, strokeWidth: 2.5),
                         )
                       : Text(
                           "Let's Get Started",

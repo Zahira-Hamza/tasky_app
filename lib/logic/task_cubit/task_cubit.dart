@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../data/models/task_model.dart';
 import '../../data/repositories/task_repository.dart';
 import 'task_state.dart';
@@ -46,5 +47,10 @@ class TaskCubit extends Cubit<TaskState> {
     } catch (e) {
       emit(TaskError(e.toString()));
     }
+  }
+
+  /// Resets state to empty immediately — used on logout before navigation.
+  void clearTasks() {
+    emit(const TaskLoaded([]));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+
 import '../models/task_model.dart';
 
 class TaskRepository {
@@ -34,5 +35,10 @@ class TaskRepository {
 
   Future<void> deleteTask(String id) async {
     await _box.delete(id);
+  }
+
+  /// Wipes every task — called on logout so the next user starts fresh.
+  Future<void> deleteAllTasks() async {
+    await _box.clear();
   }
 }
