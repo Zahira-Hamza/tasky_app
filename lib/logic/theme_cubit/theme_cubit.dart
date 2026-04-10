@@ -20,4 +20,6 @@ class ThemeCubit extends Cubit<ThemeMode> {
     await box.put(_themeKey, !isDark);
     emit(!isDark ? ThemeMode.dark : ThemeMode.light);
   }
+
+  bool get isDark => state == ThemeMode.dark;
 }

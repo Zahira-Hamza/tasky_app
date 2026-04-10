@@ -19,10 +19,21 @@ class TaskLoaded extends TaskState {
 
   @override
   List<Object> get props => [tasks];
-  
-  List<TaskModel> get achievedTasks => tasks.where((t) => t.isCompleted).toList();
-  List<TaskModel> get highPriorityTasks => tasks.where((t) => t.isHighPriority && !t.isCompleted).toList();
-  List<TaskModel> get myTasks => tasks.where((t) => !t.isHighPriority && !t.isCompleted).toList();
+
+  List<TaskModel> get achievedTasks =>
+      tasks.where((t) => t.isCompleted).toList();
+
+  /// High priority tasks that are NOT yet completed — shown in the home card
+  List<TaskModel> get highPriorityTasks =>
+      tasks.where((t) => t.isHighPriority && !t.isCompleted).toList();
+
+  /// All non-completed tasks regardless of priority — shown in "My Tasks" list
+  List<TaskModel> get myTasks =>
+      tasks.where((t) => !t.isCompleted).toList();
+
+  /// Only completed tasks — shown in Completed tab
+  List<TaskModel> get completedTasks =>
+      tasks.where((t) => t.isCompleted).toList();
 }
 
 class TaskError extends TaskState {

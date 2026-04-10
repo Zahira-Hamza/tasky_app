@@ -1,0 +1,27 @@
+## flutter_native_splash configuration
+## Run: dart run flutter_native_splash:create
+#
+#flutter_native_splash:
+#
+#  # Light mode splash
+#  color: "#F7F7F7"
+#  image: assets/images/tasky_logo.png
+#  color_dark: "#121212"
+#  image_dark: assets/images/tasky_logo.png
+#
+#  # Android 12+ specific (uses the files you already prepared)
+#  android_12:
+#    image: assets/images/splash_android12_light.png
+#    color: "#F6F7F9"
+#    image_dark: assets/images/splash_android12_dark.png
+#    color_dark: "#181818"
+#
+#  # General settings
+#  android: true
+#  ios: true
+#  web: false
+#
+#  # Branding image (bottom of screen, optional)
+#  # branding: assets/images/tasky_logo.png
+#
+#  fullscreen: true

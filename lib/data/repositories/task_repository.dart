@@ -25,8 +25,11 @@ class TaskRepository {
     await _box.put(task.id, task);
   }
 
+  /// FIX: Use _box.put(id, updatedTask) instead of task.save().
+  /// copyWith() creates a NEW object not in a box, so .save() crashes
+  /// with "HiveError: This object is currently not in a box."
   Future<void> updateTask(TaskModel task) async {
-    await task.save();
+    await _box.put(task.id, task);
   }
 
   Future<void> deleteTask(String id) async {

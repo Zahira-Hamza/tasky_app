@@ -14,8 +14,7 @@ class TaskCubit extends Cubit<TaskState> {
       final tasks = _repository.getTasks();
       emit(TaskLoaded(tasks));
     } catch (e) {
-      // In case repo fails gracefully emit empty rather than endless loader
-      emit(const TaskLoaded([])); 
+      emit(const TaskLoaded([]));
     }
   }
 
@@ -28,6 +27,9 @@ class TaskCubit extends Cubit<TaskState> {
     }
   }
 
+  /// updateTask receives the ALREADY-modified copyWith() object.
+  /// Repository now uses _box.put(id, task) which correctly overwrites
+  /// the specific entry by key — no more "not in a box" crash.
   Future<void> updateTask(TaskModel task) async {
     try {
       await _repository.updateTask(task);
